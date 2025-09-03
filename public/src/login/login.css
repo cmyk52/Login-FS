@@ -1,0 +1,69 @@
+/* Reset CSS */
+
+body{
+    margin: auto 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    all: unset;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+
+a {
+    all: unset;
+}
+
+/* Estilos formulario */
+
+
+.wrap_form {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100%; 
+    background-color: rgb(80, 80, 80);
+}
+
+.form {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto; 
+    padding: 15px 5px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px;
+}
+.form header {
+    margin: auto;
+    padding: 0;
+}
+.form h1 {
+    text-transform: uppercase;
+    
+}
+.form > * {
+    padding: .5rem;
+    margin-top: .2rem;
+}
+
+.form > div {
+    display: flex;
+    justify-content: space-between;
+}
+.form > button {
+    background-color: rgb(85, 85, 85);
+    color: rgb(240,240,240);
+    text-transform: capitalize;
+    font-size: 14px;
+    border: none;
+}
+
+.form > div > a {
+    font-size: .8rem;
+    color: rgb(44, 44, 44);
+}
