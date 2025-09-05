@@ -38,12 +38,9 @@ function validate_data(u,p){
 
 // Fetch para ingreso a sesion
 async function post(u,p){
-    console.log('ingresando')
-    console.log(u,p)
 
-    
     try{
-        await fetch('http://localhost:3000/login',{
+        const response = await fetch('http://localhost:3000/login',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,11 +48,29 @@ async function post(u,p){
             body: JSON.stringify({"user":u, "password":p})
             
         })
-        
-        
+
+       redirect(response) 
     }
     catch(error){
-        console.log(error)
+        alert('Existe un error al intentar conectar al servidor, intentelo mas tarde')
+    }
+       
+
+}
+
+// Redireccion y manejo de errores segun status
+
+function redirect(response){
+    
+
+    if(response.status !== 200 && response.status !== 401){
+        alert(response.status)
+        return
+    }
+    if(response.status === 401){
+        alert("Usuario o password invalidos")
+        return
     }
 
+    alert("todo ok")
 }
