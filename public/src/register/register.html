@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./register.css">
     <title>Register</title>
 </head>
 <body>
-    
+    <article class="wrap_form">
+        <form class="form">
+            <h1>Registro</h1>
+
+            <input type="text" name="nombre" id="nombre" placeholder="Ingresa tu nombe">
+            <input type="text" name="apellido" id="apellido" placeholder="Ingresa tu apellido">
+            <input type="email" name="email" id="email" placeholder="ingresatu@mail.aqui">
+            <input type="text" name="usuario" id="usuario" placeholder="Crea tu usuario">
+            <input type="password" name="password" id="password" placeholder="Crea tu password">
+
+            <div class="checkbox">
+            <p>Mostrar password</p>
+            <input type="checkbox">
+            </div>
+
+            <input type="password" name="repite_password" id="repite_password" placeholder="Repite tu password">
+            <input type="number" name="recuperacion" id="recuperacion" placeholder="Ingresa un numero de recuperacion entre 5 y 10 caracteres">
+            <div class="checkbox">
+            <p>Mostrar codigo</p>
+            <input type="checkbox">
+            </div>
+
+            <button id="button_login">Crear usuario</button>
+            <a href="../login/login.html">Volver al login</a>
+        </form>
+    </article>
 </body>
 </html>
