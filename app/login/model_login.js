@@ -1,4 +1,7 @@
-import pool from "../config/db_connection.js"
+import pass_hash from "./utils_crypto.js"
+import query_server from "./utils_db.js"
+
+
 
 // Creamos una funcion asyncronica con el res,req de la ruta para capturar el body de la solicitud y procesarla en la solicitud a la dba
 const  get_users = async (req,res)=>{
@@ -6,34 +9,29 @@ const  get_users = async (req,res)=>{
    
     const {user, password } = req.body
 
-
-        try{
-        const [rows, fields] = await pool.query('SELECT usuario, pass FROM users WHERE usuario = ?', [user])
-
-            // Valida si es undefined al momento de consultar a la dba
-            if (rows.length === 0) {
-            return res.status(401).json({ message: "Usuario no encontrado" })
-            }
-
-            // Valida los datos segun respuesta de la dba
-            if(user !== rows[0].usuario || password !== rows[0].pass){
-            res.status(401).json({message:"Usuario o password incorrecto!"})
-            console.log('error')
-            return
-            }
-
-            // Si el usuario y password son correctos envia OK
-            res.status(200).json({message:"OKI DOKI"})
-            console.log('succes')
-
-
-        }
-    catch(error){
-        console.log(error)
-        // En caso de error del servidor, responderemos a la ruta status 500
-        res.status(500).json({ message: "Error en el servidor" })
+    // Validando envio de usuario y password
+    if(!user || !password){
+        return res.status(401).json({message:'Falta ingresar usuario o pass'})
     }
+
+    //Si hay usuario y pass, se realiza consulta a mysql para validar que el usuario exista devolviendo False en caso que no exista
     
+    const result = await query_server(user)
+    if(result == false){
+        return res.status(400).json({message:'Usuario no existe'})
+    }
+
+    //Si el usuario existe, se comprueba si la pass y la password hasheada estan correctas
+
+    const pass_is_good = await pass_hash(password, result[0].pass)
+    if(pass_is_good == false){
+        return res.status(401).json({message:'Usuario o passowrd incorrecto'})
+    }
+
+    res.status(200).json({message:"OKI DOKI"})
+    console.log('succes')
+
+
 
 }
 
@@ -42,3 +40,4 @@ const  get_users = async (req,res)=>{
 // exportamos la funcion a las rutas para simplificar la ruta
 
 export default get_users
+
