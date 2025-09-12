@@ -5,7 +5,6 @@ import { config } from "dotenv";
 config(); // carga el .env
 
 const conf = {
-  PORT: process.env.PORT || 4001,
   SECRET: process.env.SECRET_KEY || "SECRETO"
 };
 

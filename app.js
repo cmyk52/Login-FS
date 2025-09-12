@@ -3,14 +3,14 @@ const app = express()
 import cors from 'cors'
 
 //Config
-import conf from './config/variables_entorno.js' 
+import conf from './app/config/variables_entorno.js' 
 
 //Import routes
-import router_login from './login/router_login.js'
-import router_delete from './delete/router_delete.js'
-import router_profile from './profile/router_profile.js'
-import router_register from './register/router_register.js'
-import router_404 from './404/router_404.js'
+import router_login from './app/login/router_login.js'
+import router_delete from './app/delete/router_delete.js'
+import router_profile from './app/profile/router_profile.js'
+import router_register from './app/register/router_register.js'
+import router_404 from './app/404/router_404.js'
 
 
 

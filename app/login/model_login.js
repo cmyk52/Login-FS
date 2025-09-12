@@ -1,5 +1,6 @@
 import pass_hash from "./utils_crypto.js"
 import query_server from "./utils_db.js"
+import token_controller from "./utils_jwt.js"
 
 
 
@@ -17,6 +18,9 @@ const  get_users = async (req,res)=>{
     //Si hay usuario y pass, se realiza consulta a mysql para validar que el usuario exista devolviendo False en caso que no exista
     
     const result = await query_server(user)
+    const body_user = result[0]
+
+    
     if(result == false){
         return res.status(400).json({message:'Usuario no existe'})
     }
@@ -27,9 +31,19 @@ const  get_users = async (req,res)=>{
     if(pass_is_good == false){
         return res.status(401).json({message:'Usuario o passowrd incorrecto'})
     }
+    
+    // enviamos cuerpo de la consulta a SQL para crear el token
+    const token = await token_controller(body_user)
+    console.log(token)
 
     res.status(200).json({message:"OKI DOKI"})
+
+    
+
+
     console.log('succes')
+    
+    
 
 
 

@@ -67,3 +67,8 @@ a {
     font-size: .8rem;
     color: rgb(44, 44, 44);
 }
+.form > div > p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
