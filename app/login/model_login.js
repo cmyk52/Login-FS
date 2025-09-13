@@ -18,7 +18,7 @@ const  get_users = async (req,res)=>{
     //Si hay usuario y pass, se realiza consulta a mysql para validar que el usuario exista devolviendo False en caso que no exista
     
     const result = await query_server(user)
-    const body_user = result[0]
+
 
     
     if(result == false){
@@ -33,10 +33,11 @@ const  get_users = async (req,res)=>{
     }
     
     // enviamos cuerpo de la consulta a SQL para crear el token
+    const body_user = result[0]
     const token = await token_controller(body_user)
-    console.log(token)
 
-    res.status(200).json({message:"OKI DOKI"})
+
+    res.status(200).json({message:"Usuario logeado con exito", token})
 
     
 
